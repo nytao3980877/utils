@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- url:"数据所在网址路径"  fileName="功能名，后续生成的Excel文件的前缀" -->
+<crwal url="http://brand.efu.com.cn/list-1-9-0-0-0-0-1.html" fileName="品牌网-1">
+	<!--lis:"数据列表定位，结果为lsit列表"   selector:"选择器类型By的方法名"  value:"选择器参数" -->
+	<lis selector="cssSelector" value="div.lstPhotob" >
+		<!-- li:"每个数据定位，须唯一"  name:"数据名称（索引）"   type="数据所位于的元素的属性名" -->
+		<li selector="cssSelector" value=".lstPa-a>a" type="text" name="品牌名称"/>
+		<li selector="cssSelector" value=".sp-b>a" type="text" name="所属企业"/>
+		<!-- link:"新页面数据的链接定位" -->
+		<link selector="cssSelector" value=".sp-b>a">
+			<!-- li:"新页面数据 获取方式及定位"-->
+			<li selector="xpath" value="//dt[contains(text(),'地址')]/following-sibling::dd" type="text" name="企业地址"/>
+			<li selector="xpath" value="//dt[contains(text(),'电话')]/following-sibling::dd" type="text" name="联系电话"/>
+		</link>
+	</lis>
+	<!-- next:"翻页元素定位" -->
+	<next selector="xpath" value="//a[@class='a02' and contains(@href,'http')]"/>
+</crwal>
