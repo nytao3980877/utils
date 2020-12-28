@@ -1,18 +1,26 @@
 package simple.frame;
-
+/**
+ *配置映射文件 
+ *
+ */
 public class Mapper {
 
+	//选择器
 	private String selector;
+	//选择器参数
 	private String value;
+	//自定义数据名称
 	private String name;
+	//元素的属性类型
 	private String type;
 
+	//元素定位构造方法
 	public Mapper(String selector, String value) {
 		super();
 		this.selector = selector;
 		this.value = value;
 	}
-	
+	//数据定位及信息构造方法
 	public Mapper(String selector, String value, String name, String type) {
 		super();
 		this.selector = selector;
@@ -21,6 +29,8 @@ public class Mapper {
 		this.type = type;
 	}
 
+	//之后是get、set、toString方法
+	
 	public  String getSelector() {
 		return selector;
 	}
