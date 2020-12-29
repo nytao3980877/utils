@@ -1,4 +1,5 @@
 [一个简单的爬虫工具](https://github.com/nytao3980877/utils/tree/crawl)
+
 ### 前言
 >一般情况下,网站中的数据是以列表、分页形式展示的，这样就有了规律可循：
 >1. 打开数据页面网址
@@ -199,6 +200,8 @@ public class Module implements AppUtils{
 	private ConfigEntity cf;
 	//生成后的文件名
 	private String fileName;
+	//数据所在页面
+	private String url;
 	
 	public Module(WebDriver driver,String configFile) {
 		this.driver = driver;
@@ -232,6 +235,29 @@ public class Module implements AppUtils{
 			e.printStackTrace();
 		}finally {
 			//关闭驱动
+			quit();
+		}
+	}
+	/**
+	 * 爬取批量不同页面数据（页面路径不同，数据结构相同）
+	 * @param urls 指定路径
+	 */
+	public void crawl(List<String> urls) {
+		try {
+			List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+			for (String url : urls) {
+				setUrl(url);
+				openUrl();
+				list.addAll(all());
+			}
+			int size = list.size();
+			System.out.println("-----共"+size+"条------------");
+			fileName = Excel.write(list, fileName);
+			Excel.resetFormat(fileName);
+			System.out.println("完成！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
 			quit();
 		}
 	}
@@ -404,6 +430,14 @@ public class Module implements AppUtils{
 	@Override
 	public WebDriver getDriver() {
 		return driver;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
